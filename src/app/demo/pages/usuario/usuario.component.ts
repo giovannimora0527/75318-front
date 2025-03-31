@@ -49,8 +49,7 @@ export class UsuarioComponent {
 
   cargarListaUsuarios() {
     this.usuarioService.getUsuarios().subscribe({
-      next: (data) => {
-        console.log(data);
+      next: (data) => {       
         this.usuarios = data;
       },
       error: (error) => {
