@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from './service/usuario.service';
@@ -5,7 +6,6 @@ import { Usuario } from 'src/app/models/usuario';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 // Importa los objetos necesarios de Bootstrap
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const bootstrap: any;
 
 @Component({
