@@ -36,6 +36,14 @@ export const NavigationItems: NavigationItem[] = [
         url: '/inicio/autores',
         icon: 'feather icon-home',
         classes: 'nav-item'
+      },
+      {
+        id: 'libro',
+        title: 'Gestión de Libros',
+        type: 'item',
+        url: '/inicio/libros',
+        icon: 'feather icon-book',
+        classes: 'nav-item'
       }
     ]
   },
