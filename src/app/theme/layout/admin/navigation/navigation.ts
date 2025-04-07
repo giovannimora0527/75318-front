@@ -37,7 +37,6 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'feather icon-home',
         classes: 'nav-item'
       },
-  /* ---------- Nuevos menus aqui -------------  */
       {
         id: 'libro',
         title: 'Gestión de Libros',
@@ -53,7 +52,7 @@ export const NavigationItems: NavigationItem[] = [
         url: '/inicio/prestamos',
         icon: 'feather icon-users',
         classes: 'nav-item'
-      }
+      },
     ]
   },
   

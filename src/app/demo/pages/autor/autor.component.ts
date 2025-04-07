@@ -24,8 +24,9 @@ export class AutorComponent {
 
   form: FormGroup = new FormGroup({
     nombre: new FormControl(''),
-    correo: new FormControl(''),
-    telefono: new FormControl('')
+    nacionalidad: new FormControl(''),
+    fecha_nacimiento: new FormControl(''),
+
   });
 
   constructor(
@@ -40,6 +41,7 @@ export class AutorComponent {
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       nacionalidad: ['', [Validators.required, Validators.email]],
+      fecha_nacimiento: ['', [Validators.required]],
     });
   }
 
@@ -78,6 +80,7 @@ export class AutorComponent {
     this.form.reset({
       nombre: '',
       nacionalidad: '',
+      fecha_nacimiento: '',
     });
     if (this.modalInstance) {
       this.modalInstance.hide();

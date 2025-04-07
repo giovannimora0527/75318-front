@@ -3,7 +3,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col">
-            <button class="btn btn-outline-dark btn-sm" (click)="crearAutorModal('A')" title="Agregar un nuevo autor">
+            <button class="btn btn-outline-primary btn-sm" (click)="crearAutorModal('A')" title="Agregar un nuevo autor">
               <i class="fa fa-plus"></i>
               &nbsp;Nuevo
             </button>
@@ -21,6 +21,7 @@
                       <tr>
                         <th>Nombre completo</th>
                         <th>Nacionalidad</th>
+                        <th>Fecha de Nacimiento</th>
                         <th class="text-center">Opciones</th>
                       </tr>
                     </thead>
@@ -36,6 +37,9 @@
                         </td>
                         <td>
                           {{ autor.nacionalidad }}
+                        </td>
+                        <td>
+                          {{ autor.fecha_nacimiento }}
                         </td>
                         <td class="text-center">
                           <button class="btn btn-outline-primary btn-sm" title="Editar autor" (click)="abrirModoEdicion(autor)">
@@ -83,7 +87,20 @@
                 El nombre completo es requerido.
               </div>
             </div>
-  
+            <div class="mb-3">
+              <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                formControlName="fecha_nacimiento"
+                class="form-control"
+                id="fecha_nacimiento"
+                placeholder="Ingrese la fecha de nacimiento"
+                [ngModel]="autorSelected?.fecha_nacimiento"
+              />
+              <div *ngIf="form.get('fecha_nacimiento')?.hasError('required') && form.get('fecha_nacimiento')?.touched" class="text-danger">
+                La fecha de nacimiento es requerida.
+              </div>
+            </div>
             <div class="mb-3">
               <label for="nacionalidad" class="form-label">Nacionalidad</label>
               <input

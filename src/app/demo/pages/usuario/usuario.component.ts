@@ -23,7 +23,7 @@ export class UsuarioComponent {
   usuarioSelected: Usuario;
 
   form: FormGroup = new FormGroup({
-    nombreCompleto: new FormControl(''),
+    nombre: new FormControl(''),
     correo: new FormControl(''),
     telefono: new FormControl('')
   });
@@ -38,7 +38,7 @@ export class UsuarioComponent {
 
   cargarFormulario() {
     this.form = this.formBuilder.group({
-      nombreCompleto: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required]]
     });
@@ -117,13 +117,16 @@ export class UsuarioComponent {
           ...this.form.getRawValue() // Sobrescribir con los valores del formulario
         };
         this.usuarioSelected.idUsuario = idUsuario;
-        console.log(this.usuarioSelected);
+        console.log(this.usuarioSelected);     
         // Actualizamos el usuario
         this.usuarioService.actualizarUsuario(this.usuarioSelected).subscribe(
           {
             next: (data) => {
-              this.showMessage("Éxito", "Se ha actualizado el usuario satisfactoriamente", "success");
-              console.log(data);
+              this.showMessage("Éxito", data.message, "success");
+              this.cargarListaUsuarios();
+              this.cerrarModal(); 
+              console.log(data);  
+              this.usuarioSelected = null;     
             },
             error: (error) => {
               console.log(error.error.message);
