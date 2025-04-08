@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from './service/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { MessageUtils } from 'src/app/utils/message-utils';
 // Importa los objetos necesarios de Bootstrap
 declare const bootstrap: any;
 
@@ -31,7 +32,8 @@ export class UsuarioComponent {
 
   constructor(
     private usuarioService: UsuarioService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private messageUtils: MessageUtils
   ) {
     this.cargarListaUsuarios();
     this.cargarFormulario();
@@ -105,20 +107,19 @@ export class UsuarioComponent {
     console.log(this.form.valid);
     if (this.modoFormulario === 'C') {
       this.form.get('activo').setValue(true);
-    }
-    console.log(this.form.getRawValue());    
+    }   
     if (this.form.valid) {
       if (this.modoFormulario.includes('C')) {
         this.usuarioService.guardarUsuarioNuevo(this.form.getRawValue()).subscribe({
           next: (data) => {
             console.log(data);
-            this.showMessage('Éxito', data.message, 'success');
+            this.messageUtils.showMessage('Éxito', data.message, 'success');
             this.cargarListaUsuarios();
             this.cerrarModal();
           },
           error: (error) => {
             console.log(error);
-            this.showMessage('Error', error.error.message, 'error');
+            this.messageUtils.showMessage('Error', error.error.message, 'error');
           }
         });
       } else {
@@ -128,12 +129,11 @@ export class UsuarioComponent {
           ...this.usuarioSelected, // Mantener los valores anteriores
           ...this.form.getRawValue() // Sobrescribir con los valores del formulario
         };
-        this.usuarioSelected.idUsuario = idUsuario;
-        console.log(this.usuarioSelected);
+        this.usuarioSelected.idUsuario = idUsuario;       
         // Actualizamos el usuario
         this.usuarioService.actualizarUsuario(this.usuarioSelected).subscribe({
           next: (data) => {
-            this.showMessage('Éxito', data.message, 'success');
+            this.messageUtils.showMessage('Éxito', data.message, 'success');
             this.cargarListaUsuarios();
             this.cerrarModal();
             console.log(data);
@@ -141,29 +141,10 @@ export class UsuarioComponent {
           },
           error: (error) => {
             console.log(error.error.message);
-            this.showMessage('Error', error.error.message, 'error');
+            this.messageUtils.showMessage('Error', error.error.message, 'error');
           }
         });
       }
     }
-  }
-
-  public showMessage(title: string, text: string, icon: SweetAlertIcon) {
-    Swal.fire({
-      title: title,
-      text: text,
-      icon: icon,
-      confirmButtonText: 'Aceptar',
-      customClass: {
-        container: 'position-fixed',
-        popup: 'swal-overlay'
-      },
-      didOpen: () => {
-        const swalPopup = document.querySelector('.swal2-popup');
-        if (swalPopup) {
-          (swalPopup as HTMLElement).style.zIndex = '1060';
-        }
-      }
-    });
   }
 }
