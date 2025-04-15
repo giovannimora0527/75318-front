@@ -53,6 +53,7 @@ export class AutorComponent {
     this.autorService.getAutor().subscribe({
       next: (data) => {
         this.autores = data;
+        console.log(data);
       },
       error: (error) => {
         Swal.fire('Error', error.error.message, 'error');

@@ -39,7 +39,7 @@
                           {{ autor.nacionalidad }}
                         </td>
                         <td>
-                          {{ autor.fecha_nacimiento }}
+                          {{ autor.fechaNacimiento }}
                         </td>
                         <td class="text-center">
                           <button class="btn btn-outline-primary btn-sm" title="Editar autor" (click)="abrirModoEdicion(autor)">
@@ -90,12 +90,14 @@
             <div class="mb-3">
               <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
               <input
-                type="date"
+                type="date" 
+                id="fecha" 
+                name="fecha"
                 formControlName="fecha_nacimiento"
                 class="form-control"
                 id="fecha_nacimiento"
                 placeholder="Ingrese la fecha de nacimiento"
-                [ngModel]="autorSelected?.fecha_nacimiento"
+                [ngModel]="autorSelected?.fechaNacimiento"
               />
               <div *ngIf="form.get('fecha_nacimiento')?.hasError('required') && form.get('fecha_nacimiento')?.touched" class="text-danger">
                 La fecha de nacimiento es requerida.
