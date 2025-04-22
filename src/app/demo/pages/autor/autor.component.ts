@@ -106,7 +106,7 @@ export class AutorComponent {
     });
     console.log(this.form);
     console.log(this.autorSelected);
-    this.crearAutorModal('A');
+    this.crearAutorModal('E');
     console.log(this.autorSelected);
   }
 
@@ -126,11 +126,12 @@ export class AutorComponent {
   }
   
   guardarActualizar() {
-  console.log(this.form.getRawValue());
+  
 
   if (this.form.valid) {
     if (this.modoFormulario === 'C') {
       console.log("Crear");
+      console.log(this.form.getRawValue());     
       this.autorService.crearAutor(this.form.getRawValue()).subscribe({
         next: (data) => {
           console.log(data.message);
@@ -156,8 +157,7 @@ export class AutorComponent {
         nombre: this.form.get('nombre').value,
         fechaNacimiento: this.form.get('fechaNacimiento').value,
         nacionalidad: { nacionalidadId: parseInt(nacionalidadIdValue, 10), nombre: selectedNacionalidad ? selectedNacionalidad.nombre : '' }
-      };
-
+      };     
       this.autorService.actualizarAutor(this.autorSelected).subscribe({
         next: (data) => {
           console.log(data.message);
