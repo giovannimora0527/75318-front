@@ -7,12 +7,14 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { MessageUtils } from 'src/app/utils/message-utils';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { DndDropEvent, DndModule } from 'ngx-drag-drop';
 // Importa los objetos necesarios de Bootstrap
 declare const bootstrap: any;
 
+
 @Component({
   selector: 'app-usuario',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxSpinnerModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxSpinnerModule, DndModule],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.scss'
 })
@@ -70,6 +72,16 @@ export class UsuarioComponent {
     this.titleModal = modoForm == 'C' ? 'Crear Usuario' : 'Editar Usuario';
     this.modoFormulario = modoForm;
     const modalElement = document.getElementById('crearUsuarioModal');
+    if (modalElement) {
+      // Verificar si ya existe una instancia del modal
+      this.modalInstance ??= new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
+    }
+  }
+
+  abrirCargarModal() {  
+    this.titleModal = "Cargar usuarios";
+    const modalElement = document.getElementById('cargarUsuarioModal');
     if (modalElement) {
       // Verificar si ya existe una instancia del modal
       this.modalInstance ??= new bootstrap.Modal(modalElement);
@@ -150,5 +162,9 @@ export class UsuarioComponent {
         });
       }
     }
+  }
+
+  onDrop(event: DndDropEvent): void {
+    console.log('Item dropped:', event);
   }
 }

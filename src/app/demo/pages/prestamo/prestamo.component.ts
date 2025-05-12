@@ -141,9 +141,7 @@ export class PrestamoComponent {
     this.msjSpinner = 'Guardando';   
     if (this.modoFormulario.includes('C')) {
       this.form.get('fechaEntrega')?.setValue(1);
-    }
-    console.log(this.form.valid);
-    console.log(this.form);
+    } 
     if (!this.form.valid) {
       this.messageUtils.showMessage('Error', 'Por favor, complete todos los campos obligatorios.', 'error');
       return;
